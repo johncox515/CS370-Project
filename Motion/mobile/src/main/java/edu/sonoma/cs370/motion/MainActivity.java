@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startActivityOnClick(View v)
+    public void goToSettingsActivity(View v)
     {
-       Intent intent = new Intent(this,DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+       Intent intent = new Intent(this,Settings.class);
+       //EditText editText = (EditText) findViewById(R.id.edit_message);
+       // String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 }
