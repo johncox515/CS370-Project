@@ -1,5 +1,7 @@
 package edu.sonoma.cs370.motion;
 
+import android.widget.EditText;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final static String EXTRA_MESSAGE = "edu.sonoma.cs370.motion.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
 
+    }
+
+    public void goToSettingsActivity(View v)
+    {
+       Intent intent = new Intent(this,Settings.class);
+       //EditText editText = (EditText) findViewById(R.id.edit_message);
+       // String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 }
