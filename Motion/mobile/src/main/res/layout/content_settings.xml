@@ -16,7 +16,7 @@
         android:text=""
         android:id="@+id/settings"
         android:alpha=".75"
-        android:background="@drawable/mybodysettings2"
+        android:background="@drawable/mybody"
     />
 
 
