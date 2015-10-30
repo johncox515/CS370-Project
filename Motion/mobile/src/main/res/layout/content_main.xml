@@ -18,7 +18,8 @@
         android:background="@drawable/startactivity"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="goToRunning" />
 
     <ImageButton
         android:layout_width="120dp"
@@ -39,7 +40,8 @@
         android:background="@drawable/settingsbutton2"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="goToSettingsActivity" />
 
     <ImageView
         android:layout_width="fill_parent"
