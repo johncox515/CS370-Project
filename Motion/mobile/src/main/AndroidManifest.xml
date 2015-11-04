@@ -54,6 +54,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.sonoma.cs370.motion.MainActivity" />
         </activity>
+        <activity
+            android:name=".CalorieActivity"
+            android:label="@string/title_activity_calorie"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.sonoma.cs370.motion.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
