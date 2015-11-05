@@ -63,4 +63,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+    public void goToCalorie(View v)
+    {
+        Intent intent = new Intent(this, CalorieActivity.class);
+        startActivity(intent);
+    }
 }
