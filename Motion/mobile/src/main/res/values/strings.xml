@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_running">Running</string>
+<<<<<<< HEAD
     <string name="title_activity_profile">Profile</string>
     
     <string-array name="user_height">
@@ -293,4 +294,7 @@
 
     </string-array>
 
+=======
+    <string name="title_activity_maps">Map</string>
+>>>>>>> dfd1351dbe959ed67a3bca7f2fe67d8438f0c79b
 </resources>

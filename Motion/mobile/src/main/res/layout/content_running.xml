@@ -17,7 +17,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/startbutton"
-        android:alpha=".85" />
+        android:alpha=".85"
+        android:onClick="goToMaps" />
 
     <Chronometer
         android:layout_width="50dp"
