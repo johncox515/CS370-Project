@@ -59,4 +59,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToCalorie(View v)
+    {
+        Intent intent = new Intent(this, CalorieActivity.class);
+        startActivity(intent);
+    }
+
 }

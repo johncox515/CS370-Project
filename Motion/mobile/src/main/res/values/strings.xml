@@ -7,5 +7,5 @@
     <string name="timerVal">00:00:00</string>
     <string name="pauseButtonLabel">Pause</string>
     <string name="startButtonLabel">Start</string>
-
+    <string name="title_activity_calorie">CalorieActivity</string>
 </resources>
