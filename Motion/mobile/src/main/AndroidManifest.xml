@@ -37,12 +37,13 @@
             android:label="@string/title_activity_running"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-<<<<<<< HEAD
+
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" >
-=======
+        </activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -61,7 +62,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.sonoma.cs370.motion.MainActivity" />
->>>>>>> dfd1351dbe959ed67a3bca7f2fe67d8438f0c79b
+
         </activity>
     </application>
 
