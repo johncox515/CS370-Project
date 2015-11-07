@@ -7,17 +7,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_running" tools:context="edu.sonoma.cs370.motion.Running"
+    tools:showIn="@layout/activity_calorie" tools:context="edu.sonoma.cs370.motion.CalorieActivity"
     android:background="@drawable/background">
 
-    <ImageButton
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:id="@+id/btn_start"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/startbutton"
-        android:alpha=".85"
-        android:onClick="goToMaps" />
 
 </RelativeLayout>

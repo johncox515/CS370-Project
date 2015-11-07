@@ -34,4 +34,10 @@ public class Running extends AppCompatActivity {
 */
     }
 
+    public void goToMaps(View v)
+    {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
 }

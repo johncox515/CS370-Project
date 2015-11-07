@@ -3,28 +3,125 @@ package edu.sonoma.cs370.motion;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.os.Bundle;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.util.Log;
+import android.view.View;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private ImageButton startButton;
+    private Button pauseButton;
+
+    boolean isPressed = true;
+
+    private TextView timerValue;
+
+    private long startTime = 0L;
+
+    private Handler customHandler = new Handler();
+
+    long timeInMilliseconds = 0L;
+    long timeSwapBuff = 0L;
+    long updatedTime = 0L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
         Intent intent = getIntent();
+        setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+//        if (mMap != null){
+//            mMap.setMyLocationEnabled(true);
+//        }
+
+        timerValue = (TextView) findViewById(R.id.timerValue);
+
+        startButton = (ImageButton) findViewById(R.id.startButton);
+
+        startButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                if(isPressed) {
+                    //Log.v("BV within true", Boolean.toString(isPressed));
+                    startButton.setImageResource(R.drawable.stopbutton);
+                    startTime = SystemClock.uptimeMillis();
+                    customHandler.postDelayed(updateTimerThread, 0);
+                    //Log.d("tag","Start");
+                }
+                else{
+                    //Log.v("BV within false", Boolean.toString(isPressed));
+                    startButton.setImageResource(R.drawable.startbutton);
+                    timeSwapBuff += timeInMilliseconds;
+                    customHandler.removeCallbacks(updateTimerThread);
+                    //Log.d("tag", "Stop");
+
+                }
+                isPressed  = !isPressed;
+                //Log.v("Boolean Value", Boolean.toString(isPressed));
+                //Log.d("tag","Switch");
+
+            }
+
+        });
+
+//        pauseButton = (Button) findViewById(R.id.pauseButton);
+//
+//        pauseButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                timeSwapBuff += timeInMilliseconds;
+//                customHandler.removeCallbacks(updateTimerThread);
+//            }
+//        });
+
     }
+
+    private Runnable updateTimerThread = new Runnable() {
+        @Override
+        public void run() {
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+            updatedTime = timeSwapBuff + timeInMilliseconds;
+
+            int secs = (int) (updatedTime/1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            int milliseconds = (int) (updatedTime % 1000);
+            if(mins < 10) {
+                timerValue.setText("0" + mins + ":" + String.format("%02d", secs) + ":"
+                        + String.format("%03d", milliseconds));
+            }
+            else{
+                timerValue.setText("" + mins + ":" + String.format("%02d", secs) + ":"
+                        + String.format("%03d", milliseconds));
+            }
+            customHandler.postDelayed(this, 0);
+        }
+    };
+
 
 
     /**
@@ -38,18 +135,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//        mMap = googleMap;
-//
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker and move the camera
+        LatLng marker = new LatLng(38.348175, -122.710721);
+        mMap.addMarker(new MarkerOptions()
+                .position(marker)
+                .title("Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 14));
 
     }
+
 }

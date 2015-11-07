@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
     }
     public void goToRunning(View v)
     {
-        Intent intent = new Intent(this, Running.class);
-        startActivity(intent);
-    }
-    public void goToMaps(View v)
-    {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+
+    public void goToCalorie(View v)
+    {
+        Intent intent = new Intent(this, CalorieActivity.class);
+        startActivity(intent);
+    }
+
 }
