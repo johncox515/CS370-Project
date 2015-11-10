@@ -50,7 +50,7 @@ public final class CalorieReaderContract {
         private static final String COMMA_SEP = ",";
         private static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + CalorieEntry.TABLE_NAME + " (" +
-                 CalorieEntry._ID + " INTEGER PRIMARY KEY AUTO_INCREMENT," +
+                 CalorieEntry.COLUMN_NAME_CALORIE_ID + " INTEGER PRIMARY KEY AUTO_INCREMENT," +
                  CalorieEntry.COLUMN_NAME_CALORIE_START + TEXT_TYPE_INT + COMMA_SEP +
                  CalorieEntry.COLUMN_NAME_CURRENT_CALORIES + TEXT_TYPE_INT + COMMA_SEP +
                  CalorieEntry.COLUMN_NAME_DATE + TEXT_TYPE_TEXT + " );";
@@ -71,5 +71,17 @@ public final class CalorieReaderContract {
         return this;
     }
 
+    public createEntry(String start, String current, String date){
+	ContentValues values = new ContentValues();
+	values.put(CalorieEntry.COLUMN_NAME_CALORIE_START, start);
+	values.put(CalorieEntry.COLUMN_NAME_CURRENT_CALORIES, current);
+	values.put(CalorieEntry.COLUMN_NAME_DATE, date);
+
+	long newRowId;
+	newRowId = db.insert(
+		CalorieEntry.TABLE_NAME,
+		CalorieEntry.COLUMN_NAME_NULLABLE,
+		values);
+    }
 
 }
