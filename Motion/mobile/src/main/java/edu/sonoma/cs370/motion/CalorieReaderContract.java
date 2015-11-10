@@ -14,7 +14,9 @@ public final class CalorieReaderContract {
         public static final String COLUMN_NAME_CALORIE_START = "CalorieStart";
         public static final String COLUMN_NAME_CURRENT_CALORIES = "CaloriesCurrent";
         public static final String COLUMN_NAME_DATE = "Date";
-
+	private CalorieReaderDbHelper ourHelper;
+    	private Context ourContext;
+    	private SQLiteDatabase ourDatabase;
     }
     public class CalorieReaderDbHelper extends SQLiteOpenHelper{
 
@@ -59,15 +61,11 @@ public final class CalorieReaderContract {
 
     }
 
-    private CalorieReaderDbHelper ourHelper;
-    private Context ourContext;
-    private SQLiteDatabase ourDatabase;
-
     public Calories(Context c){
         ourContext = c;
     }
 
-    public Calories open(){
+    public Calories write(){
         ourHelper = new CalorieReaderDbHelper(ourContext);
         ourDatabase = ourHelper.getWritableDatabase();
         return this;
