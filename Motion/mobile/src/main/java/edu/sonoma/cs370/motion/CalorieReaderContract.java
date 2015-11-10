@@ -24,6 +24,7 @@ public final class CalorieReaderContract {
         public static final String DATABASE_NAME = "CalorieReader.db";
 
 
+
         public CalorieReaderDbHelper(Context context){
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
@@ -55,6 +56,22 @@ public final class CalorieReaderContract {
         private static final String SQL_DELETE_ENTRIES =
                 "DROP TABLE IF EXISTS " + CalorieEntry.TABLE_NAME;
 
+
     }
+
+    private CalorieReaderDbHelper ourHelper;
+    private Context ourContext;
+    private SQLiteDatabase ourDatabase;
+
+    public Calories(Context c){
+        ourContext = c;
+    }
+
+    public Calories open(){
+        ourHelper = new CalorieReaderDbHelper(ourContext);
+        ourDatabase = ourHelper.getWritableDatabase();
+        return this;
+    }
+
 
 }
