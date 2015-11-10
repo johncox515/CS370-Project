@@ -59,7 +59,7 @@ public final class CalorieReaderContract {
 
     }
 
-    private CalorieReaderDbHelper ourHelper;
+   /* private CalorieReaderDbHelper ourHelper;
     private Context ourContext;
     private SQLiteDatabase ourDatabase;
 
@@ -72,6 +72,6 @@ public final class CalorieReaderContract {
         ourDatabase = ourHelper.getWritableDatabase();
         return this;
     }
-
+*/
 
 }
