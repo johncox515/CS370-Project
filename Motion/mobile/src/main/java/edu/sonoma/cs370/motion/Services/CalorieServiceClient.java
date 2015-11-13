@@ -1,5 +1,7 @@
 package edu.sonoma.cs370.motion.Services;
 
+import edu.sonoma.cs370.motion.AppDefines;
+import edu.sonoma.cs370.motion.Services.Client.NutritionixClient;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;

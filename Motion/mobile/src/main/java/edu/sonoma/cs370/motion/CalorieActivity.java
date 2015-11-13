@@ -17,8 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import org.parceler.Parcels;
+//import org.parceler.Parcels;
 
+import edu.sonoma.cs370.motion.Models.CalorieSearchResultModel;
+import edu.sonoma.cs370.motion.Services.CalorieServiceClient;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

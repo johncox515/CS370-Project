@@ -12,9 +12,7 @@ public interface NutritionixClient {
     // Defining the api endpoint calls.  The @GET annotation supplies a route that will be added to the
     // AppDefines.BASE_API_URL in the CalorieServiceClient.  The @Query annotation in the method signature provides
     // a way to pass query parameters on the api call.
-    @GET("/api/search")
-    Observable<CalorieSearchResultModel> getRecipesByIngredient(@Query("q") String ingredient, @Query("key") String key);
+    @GET("/v1_1/search")
+    Observable<CalorieSearchResultModel> getCalorieByFood(@Query("q") String ingredient, @Query("key") String key);
 
-    @GET("/api/get")
-    Observable<CalorieModel> getRecipeById(@Query("rId") String recipeId, @Query("key") String key);
 }
