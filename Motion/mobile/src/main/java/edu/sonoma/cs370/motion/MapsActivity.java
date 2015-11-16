@@ -1,29 +1,19 @@
 package edu.sonoma.cs370.motion;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.app.Activity;
 import android.os.Bundle;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.util.Log;
@@ -33,26 +23,23 @@ import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
-
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ImageButton startButton;
-    private Button pauseButton;
-    private Polyline polyline;
-    private PolylineOptions rectOptions = new PolylineOptions();
+    private Button finishButton;
 
     boolean isPressed = true;
 
     private TextView timerValue;
+    private TextView milesValue;
 
     private long startTime = 0L;
 
@@ -61,6 +48,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
+    int secs = 0;
+    int mins = 0;
+    int milliseconds = 0;
+
+    float totalMiles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +64,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-//        if (mMap != null){
-//            mMap.setMyLocationEnabled(true);
-//        }
-
         timerValue = (TextView) findViewById(R.id.timerValue);
 
         startButton = (ImageButton) findViewById(R.id.startButton);
+
+        finishButton = (Button) findViewById(R.id.finishButton);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -104,14 +94,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
-//        pauseButton = (Button) findViewById(R.id.pauseButton);
-//
-//        pauseButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                timeSwapBuff += timeInMilliseconds;
-//                customHandler.removeCallbacks(updateTimerThread);
-//            }
-//        });
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startTime = 0L;
+                timeInMilliseconds = 0L;
+                timeSwapBuff = 0L;
+                updatedTime = 0L;
+                secs = 0;
+                mins = 0;
+                milliseconds = 0;
+                startButton.setImageResource(R.drawable.startbutton);
+                customHandler.removeCallbacks(updateTimerThread);
+                timerValue.setText("00:00:000");
+                totalMiles = 0;
+                milesValue = (TextView) findViewById(R.id.milesValue);
+                milesValue.setText(String.format("%.2f", totalMiles) + " Miles");
+                //isPressed = false;
+            }
+        });
 
     }
 
@@ -121,8 +121,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
             updatedTime = timeSwapBuff + timeInMilliseconds;
 
-            int secs = (int) (updatedTime / 1000);
-            int mins = secs / 60;
+            secs = (int) (updatedTime / 1000);
+            mins = secs / 60;
             secs = secs % 60;
             int milliseconds = (int) (updatedTime % 1000);
             if (mins < 10) {
@@ -157,12 +157,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d("tag", "map == null");
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         }
-        //Location myLocation = googleMap.getMyLocation();
         if (mMap != null) {
             Log.d("tag", "map != null");
 
             final ArrayList<LatLng> totalRoutePoints = new ArrayList<LatLng>();
-
+            final float[] results = new float[1];
             mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
                 @Override
                 public void onMyLocationChange(Location arg0) {
@@ -171,22 +170,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.addMarker(new MarkerOptions().position(marker).visible(false).title("You are here!"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 16));
                     totalRoutePoints.add(marker); //this adds the marker to totalRoutePoints
-                    Polyline route = mMap.addPolyline(new PolylineOptions() //this will add a line to the map
-                                    .color(Color.BLUE)
-                    );
-                    route.setPoints(totalRoutePoints); //this looks at totalRoutePoints and put all points onto the map
-                    for (int i = 0 ; i < totalRoutePoints.size() ; i++) {
-                        Log.d("value is", totalRoutePoints.get(i).toString());
-                        Log.d("list size", String.valueOf(totalRoutePoints.size()));
+
+                    if(totalRoutePoints.size() >= 2) {
+                        mMap.addPolyline(new PolylineOptions() //this will add a line to the map
+                                        .add(totalRoutePoints.get(totalRoutePoints.size() - 1),
+                                                totalRoutePoints.get(totalRoutePoints.size() - 2))
+                                        .color(Color.BLUE)
+                        );
+                        Location.distanceBetween(totalRoutePoints.get(totalRoutePoints.size() - 1).latitude,
+                                totalRoutePoints.get(totalRoutePoints.size() - 1).longitude,
+                                totalRoutePoints.get(totalRoutePoints.size() - 2).latitude,
+                                totalRoutePoints.get(totalRoutePoints.size() - 2).longitude, results);
+                        for (int i = 0; i < results.length; i++) {
+                            totalMiles(results[i]);
+                            Log.d("results[i]:", String.valueOf(results[i]));
+                            System.out.println("After return to loop: " + totalMiles);
+                        }
                     }
-                    //polyline = mMap.addPolyline(rectOptions);
-                    //updatePolyLine(marker);
-                    //LatLng oldMarker = marker;
-//                    Polyline polygon = mMap.addPolyline(new PolylineOptions()
-//                                    //.add(new LatLng(2.169919, 41.387989), new LatLng(2.169919, 41.39))
-//                                    .add(marker, new LatLng(0, 5), new LatLng(3, 5))
-//                                    .color(Color.BLUE)
-//                    );
+                    //route.setPoints(totalRoutePoints); //this looks at totalRoutePoints and put all points onto the map
+                    //debug to print out points in the list
+//                    for (int i = 0 ; i < totalRoutePoints.size() ; i++) {
+//                        Log.d("value is", totalRoutePoints.get(i).toString());
+//                        Log.d("list size", String.valueOf(totalRoutePoints.size()));
+//                    }
 
 
                 }
@@ -196,16 +202,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private void updatePolyLine(LatLng latlng) {
-        List<LatLng> points = polyline.getPoints();
-        points.add(latlng);
-        polyline.setPoints(points);
-        for (int i = 0 ; i < points.size() ; i++) {
-            Log.d("value is", points.get(i).toString());
-            Log.d("list size", String.valueOf(points.size()));
-        }
-    }
-
+    private float totalMiles(float distance){
+        Log.d("tag", "inside totalMiles");
+        System.out.println("Before Conversion: " + distance);
+        distance *= 0.000621371; //convert to miles
+        System.out.println("After Conversion: " + distance);
+        System.out.println("Before Add: " + totalMiles);
+        totalMiles += distance;
+        System.out.println("After Add: " + totalMiles);
+        milesValue = (TextView) findViewById(R.id.milesValue);
+        milesValue.setText(String.format("%.2f", totalMiles) + " Miles");
+        return totalMiles;
+    };
 
 }
 
