@@ -6,7 +6,7 @@
     <!--android:name="com.google.android.gms.maps.SupportMapFragment" />-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapActivity"
     android:background="#00000000">
@@ -33,56 +33,31 @@
 
 
         <TextView
-            android:layout_width="148dp"
-            android:layout_height="79dp"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
             android:text="00:00:000"
             android:id="@+id/timerValue"
             android:background="#f9fffdfd"
-            android:textSize="32dp"
+            android:textSize="36dp"
             android:textStyle="bold"
             android:textAlignment="center"
             android:singleLine="true"
             android:gravity="center"
-            android:autoText="true"
-            android:layout_weight="20.19" />
-
-        <TextView
-            android:layout_width="203dp"
-            android:layout_height="match_parent"
-            android:text="0.0 Miles"
-            android:id="@+id/milesValue"
-            android:background="#f9fffdfd"
-            android:textSize="32dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:singleLine="true"
-            android:gravity="center"
-            android:autoText="true"
-            android:layout_gravity="right" />
-
+            android:autoText="true" />
     </RadioGroup>
 
     <ImageButton
-        android:layout_width="185dp"
-        android:layout_height="81dp"
+        android:layout_width="fill_parent"
+        android:layout_height="75dp"
         android:text="START"
         android:id="@+id/startButton"
         android:clickable="false"
-        android:background="#fafbfa"
+        android:background="#10fb08"
         android:textStyle="bold"
         android:src="@drawable/startbutton"
-        android:scaleType="fitXY"
-        android:layout_gravity="left|bottom|center_horizontal" />
+        android:layout_gravity="bottom" />
 
-    <Button
-        android:layout_width="152dp"
-        android:layout_height="79dp"
-        android:text="FINISH"
-        android:id="@+id/finishButton"
-        android:layout_gravity="right|bottom"
-        android:background="#031bfa"
-        android:textColor="#fbf8f8"
-        android:textSize="48dp" />
+
 
 
 </FrameLayout>
