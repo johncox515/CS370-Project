@@ -3,6 +3,7 @@ package edu.sonoma.cs370.motion;
 
 import android.app.AlertDialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -69,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
         timerValue = (TextView) findViewById(R.id.timerValue);
 
         startButton = (ImageButton) findViewById(R.id.startButton);
@@ -108,19 +110,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String FinalMins = String.format("%02d", mins);
-                        Log.d("Final Minutes: ", FinalMins);
+                        //Log.d("Final Minutes: ", FinalMins);
 
                         String FinalSecs = String.format("%02d", secs);
-                        Log.d("Final Seconds: ", FinalSecs);
+                        //Log.d("Final Seconds: ", FinalSecs);
 
                         String FinalMilliseconds = String.format("%03d", milliseconds);
-                        Log.d("Final Milliseconds: ", FinalMilliseconds);
+                        //Log.d("Final Milliseconds: ", FinalMilliseconds);
 
                         String FinalMiles = String.format("%.2f", totalMiles) + " Miles";
-                        Log.d("Final Miles: ", FinalMiles);
+                        //Log.d("Final Miles: ", FinalMiles);
 
                         //CALL TO DATABASE HERE
-                        
+                        MotionDbHelper helper = new MotionDbHelper(getBaseContext());
+                        helper.createAddEntry(totalMiles, FinalMiles, FinalSecs, FinalMilliseconds);
 
                         startTime = 0L;
                         timeInMilliseconds = 0L;
