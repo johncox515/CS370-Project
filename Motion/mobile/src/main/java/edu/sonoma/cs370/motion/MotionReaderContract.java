@@ -16,6 +16,9 @@ public final class MotionReaderContract {
         public static final String COLUMN_NAME_CURRENT_CALORIES = "CaloriesCurrent";
         public static final String COLUMN_NAME_DATE = "Date";
         public static final String COLUMN_NAME_DISTANCE = "MilesRun";
+        public static final String COLUMN_NAME_TIME_MIN = "MinutesTime";
+        public static final String COLUMN_NAME_TIME_SEC = "SecTime";
+        public static final String COLUMN_NAME_TIME_MILLISEC = "MilliTime";
 
     }
     public class MotionDbHelper extends SQLiteOpenHelper{
@@ -46,12 +49,13 @@ public final class MotionReaderContract {
             onUpgrade(db, oldVersion, newVersion);
         }
 
-        public void createAddEntry(String start, String current, String date){
+        public void createAddEntry(float totalMiles, String totalMin, String totalSec, String totalMillisec){
             ContentValues values = new ContentValues();
             SQLiteDatabase db = getWritableDatabase();
-            values.put(MotionEntry.COLUMN_NAME_CALORIE_START, start);
-            values.put(MotionEntry.COLUMN_NAME_CURRENT_CALORIES, current);
-            values.put(MotionEntry.COLUMN_NAME_DATE, date);
+            values.put(MotionEntry.COLUMN_NAME_DISTANCE, totalMiles);
+            values.put(MotionEntry.COLUMN_NAME_TIME_MIN, totalMin);
+            values.put(MotionEntry.COLUMN_NAME_TIME_SEC, totalSec);
+            values.put(MotionEntry.COLUMN_NAME_TIME_MILLISEC, totalMillisec);
 
             long newRowId;
             newRowId = db.insert(
@@ -62,6 +66,7 @@ public final class MotionReaderContract {
         }
 
         private static final String TEXT_TYPE_INT = " INTEGER";
+        private static final String TEXT_TYPE_FLOAT = " FLOAT";
         private static final String TEXT_TYPE_TEXT = " TEXT";
         private static final String COMMA_SEP = ",";
         private static final String SQL_CREATE_ENTRIES =
@@ -69,8 +74,11 @@ public final class MotionReaderContract {
                  MotionEntry.COLUMN_NAME_MOTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                  MotionEntry.COLUMN_NAME_CALORIE_START + TEXT_TYPE_INT + COMMA_SEP +
                  MotionEntry.COLUMN_NAME_CURRENT_CALORIES + TEXT_TYPE_INT + COMMA_SEP +
-                 MotionEntry.COLUMN_NAME_DISTANCE + TEXT_TYPE_INT + COMMA_SEP +
-                 MotionEntry.COLUMN_NAME_DATE + TEXT_TYPE_TEXT + " );";
+                 MotionEntry.COLUMN_NAME_DISTANCE + TEXT_TYPE_FLOAT + COMMA_SEP +
+                 MotionEntry.COLUMN_NAME_TIME_MIN + TEXT_TYPE_TEXT + COMMA_SEP +
+                 MotionEntry.COLUMN_NAME_TIME_SEC + TEXT_TYPE_TEXT + COMMA_SEP +
+                 MotionEntry.COLUMN_NAME_TIME_MILLISEC + TEXT_TYPE_TEXT + COMMA_SEP +
+                 MotionEntry.COLUMN_NAME_DATE + " TIMESTAMP" + " );";
 
         private static final String SQL_DELETE_ENTRIES =
                 "DROP TABLE IF EXISTS " + MotionEntry.TABLE_NAME;
