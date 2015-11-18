@@ -2,6 +2,8 @@ package edu.sonoma.cs370.motion;
 
 
 import android.app.AlertDialog;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
@@ -17,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -54,10 +57,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     float totalMiles;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -96,20 +101,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         finishButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                startTime = 0L;
-                timeInMilliseconds = 0L;
-                timeSwapBuff = 0L;
-                updatedTime = 0L;
-                secs = 0;
-                mins = 0;
-                milliseconds = 0;
-                startButton.setImageResource(R.drawable.startbutton);
-                customHandler.removeCallbacks(updateTimerThread);
-                timerValue.setText("00:00:000");
-                totalMiles = 0;
-                milesValue = (TextView) findViewById(R.id.milesValue);
-                milesValue.setText(String.format("%.2f", totalMiles) + " Miles");
-                //isPressed = false;
+                AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+                builder.setTitle(R.string.app_name);
+                builder.setMessage("Finish run?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String FinalMins = String.format("%02d", mins);
+                        Log.d("Final Minutes: ", FinalMins);
+
+                        String FinalSecs = String.format("%02d", secs);
+                        Log.d("Final Seconds: ", FinalSecs);
+
+                        String FinalMilliseconds = String.format("%03d", milliseconds);
+                        Log.d("Final Milliseconds: ", FinalMilliseconds);
+
+                        String FinalMiles = String.format("%.2f", totalMiles) + " Miles";
+                        Log.d("Final Miles: ", FinalMiles);
+
+                        //CALL TO DATABASE HERE
+                        
+
+                        startTime = 0L;
+                        timeInMilliseconds = 0L;
+                        timeSwapBuff = 0L;
+                        updatedTime = 0L;
+                        secs = 0;
+                        mins = 0;
+                        milliseconds = 0;
+                        startButton.setImageResource(R.drawable.startbutton);
+                        customHandler.removeCallbacks(updateTimerThread);
+                        timerValue.setText("00:00:000");
+                        totalMiles = 0;
+                        milesValue = (TextView) findViewById(R.id.milesValue);
+                        milesValue.setText(String.format("%.2f", totalMiles) + " Miles");
+                        //RETURN TO HOME SCREEN HERE
+
+                        startActivity(new Intent(MapsActivity.this, MainActivity.class));
+                        //isPressed = false;
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.show();
             }
         });
 
@@ -124,10 +163,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             secs = (int) (updatedTime / 1000);
             mins = secs / 60;
             secs = secs % 60;
-            int milliseconds = (int) (updatedTime % 1000);
+            milliseconds = (int) (updatedTime % 1000);
             if (mins < 10) {
                 timerValue.setText("0" + mins + ":" + String.format("%02d", secs) + ":"
                         + String.format("%03d", milliseconds));
+
             } else {
                 timerValue.setText("" + mins + ":" + String.format("%02d", secs) + ":"
                         + String.format("%03d", milliseconds));
@@ -189,10 +229,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                     //route.setPoints(totalRoutePoints); //this looks at totalRoutePoints and put all points onto the map
                     //debug to print out points in the list
-//                    for (int i = 0 ; i < totalRoutePoints.size() ; i++) {
-//                        Log.d("value is", totalRoutePoints.get(i).toString());
-//                        Log.d("list size", String.valueOf(totalRoutePoints.size()));
-//                    }
+                    for (int i = 0 ; i < totalRoutePoints.size() ; i++) {
+                        Log.d("value is", totalRoutePoints.get(i).toString());
+                        Log.d("list size", String.valueOf(totalRoutePoints.size()));
+                    }
 
 
                 }
