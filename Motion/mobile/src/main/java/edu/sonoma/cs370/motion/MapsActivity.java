@@ -58,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     float totalMiles;
 
-    MotionDbHelper mydb;
+    //MotionDbHelper mydb;
 
 
 
@@ -124,8 +124,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //Log.d("Final Miles: ", FinalMiles);
 
                         //CALL TO DATABASE HERE
-                        //MotionDbHelper helper = new MotionDbHelper(getBaseContext());
-                        mydb.createAddEntry(totalMiles, FinalMiles, FinalSecs, FinalMilliseconds);
+                        MotionDbHelper mydb = new MotionDbHelper(getBaseContext());
+                        mydb.createAddEntry(totalMiles, FinalMins, FinalSecs, FinalMilliseconds);
                         Log.d("Database Output: ", String.valueOf(mydb.viewEntries()));
 
                         startTime = 0L;
