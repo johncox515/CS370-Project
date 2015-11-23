@@ -1,7 +1,9 @@
 package edu.sonoma.cs370.motion;
 
+import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -52,9 +54,18 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void viewEntries(SQLiteDatabase db){
-        db.execSQL("SELECT * FROM Motion;");
-        Log.d("Output", "<insert query output here>");
+    public ArrayList<String> viewEntries(){
+        ArrayList<String> array_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Motion", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN)));
+            res.moveToNext();
+        }
+        return array_list;
     }
 
     private static final String TEXT_TYPE_INT = " INTEGER";
