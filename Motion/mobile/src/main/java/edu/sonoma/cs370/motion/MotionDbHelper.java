@@ -53,8 +53,8 @@ public class MotionDbHelper extends SQLiteOpenHelper {
     }
 
     public void viewEntries(SQLiteDatabase db){
-        db.execSQL("SELECT * FROM Motion;");
-        Log.d("Output", "<insert query output here>");
+        //db.execSQL("SELECT * FROM Motion;");
+        Log.d("Database Output: ", "SELECT * FROM Motion;");
     }
 
     private static final String TEXT_TYPE_INT = " INTEGER";

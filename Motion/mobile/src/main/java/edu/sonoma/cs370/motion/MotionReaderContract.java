@@ -11,7 +11,7 @@ public final class MotionReaderContract {
 
     public static abstract class MotionEntry implements BaseColumns {
         public static final String TABLE_NAME = "Motion";
-        public static final String COLUMN_NAME_MOTION_ID = "_id";
+        public static final String COLUMN_NAME_MOTION_ID = "id";
         public static final String COLUMN_NAME_CALORIE_START = "CalorieStart";
         public static final String COLUMN_NAME_CURRENT_CALORIES = "CaloriesCurrent";
         public static final String COLUMN_NAME_DATE = "Date";
