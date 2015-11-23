@@ -15,10 +15,14 @@ public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "edu.sonoma.cs370.motion.MESSAGE";
 
+    MotionDbHelper mydb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mydb = new MotionDbHelper(this);
 
     }
 

@@ -11,11 +11,14 @@ import android.view.View;
 
 public class CalorieActivity extends AppCompatActivity {
 
+    MotionDbHelper mydb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         setContentView(R.layout.activity_calorie);
+        mydb = new MotionDbHelper(this);
     }
 
 }
