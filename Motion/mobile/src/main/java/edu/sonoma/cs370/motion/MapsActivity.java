@@ -30,8 +30,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -123,9 +125,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String FinalMiles = String.format("%.2f", totalMiles) + " Miles";
                         //Log.d("Final Miles: ", FinalMiles);
 
+                        String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
+                        Log.d("Date: ", date);
+
+
                         //CALL TO DATABASE HERE
                         MotionDbHelper mydb = new MotionDbHelper(getBaseContext());
-                        mydb.createAddEntry(totalMiles, FinalMins, FinalSecs, FinalMilliseconds);
+                        mydb.createAddEntry(totalMiles, FinalMins, FinalSecs, FinalMilliseconds, date);
                         Log.d("Database Output: ", String.valueOf(mydb.viewEntries()));
 
                         startTime = 0L;

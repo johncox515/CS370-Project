@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    tools:context="edu.sonoma.cs370.motion.Settings">
+
+    <include layout="@layout/content_settings" />
+
+
+</android.support.design.widget.CoordinatorLayout>
+<!-- From: file:/Users/Michael/Desktop/Motion_Project/CS370-Project/Motion/mobile/src/main/res/layout/activity_settings.xml -->

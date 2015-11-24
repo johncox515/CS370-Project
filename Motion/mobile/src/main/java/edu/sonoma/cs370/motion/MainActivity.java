@@ -10,10 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.database.sqlite.SQLiteDatabase;
+import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "edu.sonoma.cs370.motion.MESSAGE";
+    private TextView data;
 
     MotionDbHelper mydb;
 
@@ -21,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        data = (TextView) findViewById(R.id.dataView);
 
         mydb = new MotionDbHelper(this);
-
+        data.setText(String.valueOf(mydb.viewEntries()));
     }
 
     @Override

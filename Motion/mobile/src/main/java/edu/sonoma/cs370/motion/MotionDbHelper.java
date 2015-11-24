@@ -38,13 +38,15 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void createAddEntry(float totalMiles, String totalMin, String totalSec, String totalMillisec){
+    public void createAddEntry(float totalMiles, String totalMin, String totalSec, String totalMillisec, String date){
         ContentValues values = new ContentValues();
         SQLiteDatabase db = getWritableDatabase();
         values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE, totalMiles);
         values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN, totalMin);
         values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC, totalSec);
         values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC, totalMillisec);
+        values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE, date);
+
 
         long newRowId;
         newRowId = db.insert(
@@ -62,7 +64,11 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN)));
+            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC)));
+            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC)));
+            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
+            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
+
             res.moveToNext();
         }
         return array_list;
@@ -81,7 +87,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
                     MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN + TEXT_TYPE_TEXT + COMMA_SEP +
                     MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC + TEXT_TYPE_TEXT + COMMA_SEP +
                     MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC + TEXT_TYPE_TEXT + COMMA_SEP +
-                    MotionReaderContract.MotionEntry.COLUMN_NAME_DATE + " TIMESTAMP" + " );";
+                    MotionReaderContract.MotionEntry.COLUMN_NAME_DATE + TEXT_TYPE_TEXT + " );";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + MotionReaderContract.MotionEntry.TABLE_NAME;
