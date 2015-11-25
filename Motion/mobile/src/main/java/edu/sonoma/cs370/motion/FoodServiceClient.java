@@ -6,19 +6,19 @@ import retrofit.RxJavaCallAdapterFactory;
 
     public class FoodServiceClient {
 
-        private static IFoodProvider foodProvider;
+        private static FoodProvider foodProvider;
 
 
-        public static IFoodProvider getFoodProvider() {
+        public static FoodProvider getFoodProvider() {
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(AppDefines.BASE_API_URL)
+                    .baseUrl(AppDefines.API_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
 
 
-            foodProvider = retrofit.create(IFoodProvider.class);
+            foodProvider = retrofit.create(FoodProvider.class);
 
             return foodProvider;
 

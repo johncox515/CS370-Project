@@ -1,31 +1,17 @@
 package edu.sonoma.cs370.motion;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.BaseColumns;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-
-import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import edu.sonoma.cs370.motion.Model.FoodSearchItemModel;
 
 
 public class CalorieActivity extends AppCompatActivity {
 
-    private ImageView foodImage;
     private ListView foodList;
 
     @Override
@@ -34,70 +20,17 @@ public class CalorieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calorie);
 
 
-        foodImage = (ImageView) findViewById(R.id.foodImage);
         foodList = (ListView) findViewById(R.id.foodList);
 
 
         FoodSearchItemModel foodItem =
                 (FoodSearchItemModel) Parcels.unwrap(this.getIntent().getParcelableExtra(AppDefines.FOOD_INTENT_KEY));
 
-        setTitle(foodItem.foodName);
+        setTitle(foodItem.foodData.item_name);
 
-        FoodServiceClient.getFoodProvider()
-                .getFoodById(foodItem.foodId, AppDefines.APP_ID, AppDefines.API_KEY)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<FoodModel>() {
 
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) { int i = 0; }
-
-                    @Override
-                    public void onNext(FoodModel foodModel) {
-
-                        if (foodModel != null) {
-                            Picasso.with(getBaseContext()).load(foodModel.images.get(0).imageUrl).resize(900, 600).into(foodImage);
-
-                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                                    CalorieActivity.this,
-                                    android.R.layout.simple_list_item_1,
-                                    foodModel.food); //missing variable
-
-                            foodList.setAdapter(arrayAdapter);
-
-                        } else {
-
-                        }
-                    }
-                });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_food, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
-
 
 

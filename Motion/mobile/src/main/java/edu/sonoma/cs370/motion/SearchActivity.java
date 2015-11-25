@@ -13,6 +13,8 @@ import android.widget.ListView;
 
 import org.parceler.Parcels;
 
+import edu.sonoma.cs370.motion.Model.FoodSearchItemModel;
+import edu.sonoma.cs370.motion.Model.FoodSearchResultModel;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -20,9 +22,10 @@ import rx.schedulers.Schedulers;
 public class SearchActivity extends AppCompatActivity {
 
 
-    // In the Activity that backs the layout (activity_search), create private instances of controls
-    // to act as references to those declared in the layout.  These controls have null values until
-    // they are set to point at the actual controls in the layout instance.
+
+
+
+
     private EditText searchEditText;
     private Button searchButton;
     private ListView foodListView;
@@ -67,16 +70,16 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        // An on-click listener for the items in the recipeListView
+
         foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             // When the recipe item is clicked, the following code is executed
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                //Create an intent to contain the relevant recipe item data and to specify the activity to load
+
                 Intent foodIntent = new Intent(SearchActivity.this, CalorieActivity.class);
-                // Wrap up the RecipeSearchItemModel using Parcels (another Gradle dependency)
+
                 foodIntent.putExtra(AppDefines.FOOD_INTENT_KEY, Parcels.wrap((FoodSearchItemModel)parent.getItemAtPosition(position)));
-                // Start the intended activity using the intent
+
                 startActivity(foodIntent);
             }
         });

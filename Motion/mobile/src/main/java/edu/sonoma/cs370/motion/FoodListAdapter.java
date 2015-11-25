@@ -1,20 +1,16 @@
 package edu.sonoma.cs370.motion;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.squareup.picasso.Picasso;
+import edu.sonoma.cs370.motion.Model.FoodSearchItemModel;
 
 public class FoodListAdapter extends ArrayAdapter<FoodSearchItemModel> {
     public FoodListAdapter(Context context, ArrayList<FoodSearchItemModel> foods) {
@@ -40,17 +36,13 @@ public class FoodListAdapter extends ArrayAdapter<FoodSearchItemModel> {
             if (food != null) {
 
                 TextView nameText = (TextView) v.findViewById(R.id.foodItemNameText);
-                ImageView foodImage = (ImageView) v.findViewById(R.id.foodItemImage);
 
 
                 if (nameText != null) {
-                    nameText.setText(food.foodName);
+                    nameText.setText(food.foodData.item_name);
                 }
 
 
-                if (foodImage != null){
-                    Picasso.with(getContext()).load(food.thumbnail.get(0)).resize(200, 200).into(foodImage);
-                }
             }
 
             return v;
