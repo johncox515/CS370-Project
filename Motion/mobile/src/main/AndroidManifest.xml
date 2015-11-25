@@ -67,6 +67,8 @@
                 android:value="edu.sonoma.cs370.motion.MainActivity" />
 
         </activity>
+
+
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_calorie"
@@ -76,6 +78,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.sonoma.cs370.motion.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>

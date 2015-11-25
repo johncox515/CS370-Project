@@ -34,20 +34,20 @@ public class FoodListAdapter extends ArrayAdapter<FoodSearchItemModel> {
                 vi = LayoutInflater.from(getContext());
                 v = vi.inflate(R.layout.food_item, null);
             }
-            // Obtain the item at the current index location in the collection
+
             FoodSearchItemModel food = getItem(position);
 
             if (food != null) {
-                // create references to the UI elements from the layout file
+
                 TextView nameText = (TextView) v.findViewById(R.id.foodItemNameText);
                 ImageView foodImage = (ImageView) v.findViewById(R.id.foodItemImage);
 
-                // Set the foodName
+
                 if (nameText != null) {
                     nameText.setText(food.foodName);
                 }
 
-                // Use Picasso (another Gradle dependency) to convert the jpg thumbnail into a format usable by the ImageView
+
                 if (foodImage != null){
                     Picasso.with(getContext()).load(food.thumbnail.get(0)).resize(200, 200).into(foodImage);
                 }

@@ -38,8 +38,8 @@ public class SearchActivity extends AppCompatActivity {
         searchButton = (Button)findViewById(R.id.searchButton);
         foodListView = (ListView)findViewById(R.id.foodListView);
 
-        // A listener needs to be created to handle the button click. The body of this listener will
-        // contain the invocation of the RecipeServiceClient
+
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

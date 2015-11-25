@@ -59,10 +59,10 @@ public class CalorieActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(FoodModel foodModel) {
-                        // Handle the results
+
                         if (foodModel != null) {
                             Picasso.with(getBaseContext()).load(foodModel.images.get(0).imageUrl).resize(900, 600).into(foodImage);
-                            // Create an inline adapter instead of using an inheriting class
+
                             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                                     CalorieActivity.this,
                                     android.R.layout.simple_list_item_1,
@@ -71,7 +71,7 @@ public class CalorieActivity extends AppCompatActivity {
                             foodList.setAdapter(arrayAdapter);
 
                         } else {
-                            // handle null
+
                         }
                     }
                 });
@@ -80,19 +80,17 @@ public class CalorieActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_food, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_settings) {
             return true;
         }
