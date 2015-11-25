@@ -51,22 +51,86 @@
         android:layout_height="250dp"
         android:id="@+id/imageView"
         android:background="@drawable/placeholder"
-        android:alpha=".65"
-        android:layout_centerVertical="true"
+        android:alpha=".85"
+        android:layout_above="@+id/calories"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:id="@+id/dataView"
+        android:id="@+id/dateView"
+        android:textSize="20dp"
+        android:layout_above="@+id/calories"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/imageView"
+        android:textColor="#010101"
+        android:layout_alignRight="@+id/calories"
+        android:layout_alignEnd="@+id/calories" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Calories"
+        android:id="@+id/textView"
+        android:layout_alignRight="@+id/calories"
+        android:layout_alignEnd="@+id/calories"
+        android:layout_alignBottom="@+id/calories"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/calories"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#ca888585"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="             Date                          Time                       Miles"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/startActivity"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
         android:layout_alignRight="@+id/imageView"
         android:layout_alignEnd="@+id/imageView"
+        android:background="#fcfcfc"
+        android:textColor="#020202" />
+
+    <TextView
+        android:layout_width="125dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/timeView"
         android:layout_alignBottom="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/textView2"
+        android:layout_toLeftOf="@+id/milesView"
+        android:layout_toRightOf="@+id/calories"
+        android:layout_toEndOf="@+id/calories"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
+        android:textColor="#010101" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/milesView"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignLeft="@+id/settings"
+        android:layout_alignStart="@+id/settings"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
+        android:textColor="#010101" />
 
 
 </RelativeLayout>

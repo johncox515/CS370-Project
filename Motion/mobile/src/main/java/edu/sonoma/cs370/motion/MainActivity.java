@@ -17,7 +17,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "edu.sonoma.cs370.motion.MESSAGE";
-    private TextView data;
+    private TextView date;
+    private TextView time;
+    private TextView miles;
 
     MotionDbHelper mydb;
 
@@ -25,10 +27,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        data = (TextView) findViewById(R.id.dataView);
+        date = (TextView) findViewById(R.id.dateView);
+        time = (TextView) findViewById(R.id.timeView);
+        miles = (TextView) findViewById(R.id.milesView);
 
         mydb = new MotionDbHelper(this);
-        data.setText(String.valueOf(mydb.viewEntries()));
+
+        date.setText(String.valueOf(mydb.getDate()).replace(",", " ").replace("[", " ").replace("]", "\n").trim());
+        time.setText(String.valueOf(mydb.getTime()).replace(",", ":").replace("[", "").replace("]", "\n").trim());
+        miles.setText(String.valueOf(mydb.getMiles()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
+
     }
 
     @Override

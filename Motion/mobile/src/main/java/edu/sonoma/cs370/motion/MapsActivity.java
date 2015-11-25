@@ -132,7 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //CALL TO DATABASE HERE
                         MotionDbHelper mydb = new MotionDbHelper(getBaseContext());
                         mydb.createAddEntry(totalMiles, FinalMins, FinalSecs, FinalMilliseconds, date);
-                        Log.d("Database Output: ", String.valueOf(mydb.viewEntries()));
+                        //Log.d("Database Output: ", String.valueOf(mydb.viewEntries()));
 
                         startTime = 0L;
                         timeInMilliseconds = 0L;
@@ -254,13 +254,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private float totalMiles(float distance){
+    private double totalMiles(double distance){
         Log.d("tag", "inside totalMiles");
         System.out.println("Before Conversion: " + distance);
         distance *= 0.000621371; //convert to miles
+        distance = Math.round(distance*100.0)/100.0;
         System.out.println("After Conversion: " + distance);
         System.out.println("Before Add: " + totalMiles);
         totalMiles += distance;
+        totalMiles = (float) (Math.round(totalMiles*100.0)/100.0);
         System.out.println("After Add: " + totalMiles);
         milesValue = (TextView) findViewById(R.id.milesValue);
         milesValue.setText(String.format("%.2f", totalMiles) + " Miles");

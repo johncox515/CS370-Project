@@ -56,22 +56,56 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<String> viewEntries(){
-        ArrayList<String> array_list = new ArrayList<String>();
+    public ArrayList<String> getTime(){
+        ArrayList<String> time_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from Motion", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC)));
-            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC)));
-            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
-            array_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
+            //time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
+            time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN)));
+            time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC)));
+            time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC)));
+            //time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
+
 
             res.moveToNext();
         }
-        return array_list;
+        return time_list;
+    }
+
+
+
+    public ArrayList<String> getDate(){
+        ArrayList<String> date_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Motion", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            date_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
+
+            res.moveToNext();
+        }
+        return date_list;
+    }
+
+    public ArrayList<String> getMiles(){
+        ArrayList<String> miles_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Motion", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            miles_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
+
+            res.moveToNext();
+        }
+        return miles_list;
     }
 
     private static final String TEXT_TYPE_INT = " INTEGER";
