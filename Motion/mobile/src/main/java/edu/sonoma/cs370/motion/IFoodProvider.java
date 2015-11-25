@@ -16,7 +16,7 @@ public interface IFoodProvider {
                                                              @Query("_app_id") String appId,
                                                              @Query("_app_key") String key);
 
-    @GET("/v1/api/food/{food-id}")
+    @GET("/v1_1/brand/{id}")
     Observable<FoodModel> getFoodById(@Path("food-id") String foodId,
                                         @Query("_app_id") String appId,
                                         @Query("_app_key") String key);

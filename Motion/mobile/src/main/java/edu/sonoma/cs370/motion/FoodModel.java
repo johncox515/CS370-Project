@@ -21,6 +21,6 @@ public class FoodModel {
         public String foodId;
 
         @SerializedName("numberOfCalories")
-        public String calories;
+        public float calories;
 
     }

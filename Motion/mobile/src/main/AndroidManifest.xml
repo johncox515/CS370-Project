@@ -68,7 +68,7 @@
 
         </activity>
         <activity
-            android:name=".CalorieActivity"
+            android:name=".SearchActivity"
             android:label="@string/title_activity_calorie"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >

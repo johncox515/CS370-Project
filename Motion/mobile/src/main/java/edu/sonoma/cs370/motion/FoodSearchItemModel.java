@@ -17,6 +17,4 @@ public class FoodSearchItemModel {
         @SerializedName("smallImageUrls")
         public ArrayList<String> thumbnail;
 
-        @SerializedName("rating")
-        public float foodRating;
 }
