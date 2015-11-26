@@ -68,7 +68,7 @@ public class CalorieActivity extends AppCompatActivity {
                             @Override
                             public void onNext(CalorieSearchResultModel searchResultModel) {
                                 // Once the result set comes back from the API call, it's handed off to an adapter for processing
-                                CalorieListView.setAdapter(new CalorieListAdapter(SearchActivity.this, searchResultModel.calories));
+                                CalorieListView.setAdapter(new CalorieListAdapter(CalorieActivity.this, searchResultModel.calories));
                             }
                         });
             }
@@ -80,7 +80,7 @@ public class CalorieActivity extends AppCompatActivity {
             // When the recipe item is clicked, the following code is executed
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Create an intent to contain the relevant recipe item data and to specify the activity to load
-                Intent calorieIntent = new Intent(SearchActivity.this, RecipeActivity.class);
+                Intent calorieIntent = new Intent(CalorieActivity.this, RecipeActivity.class);
                 // Wrap up the CalorieSearchItemModel using Parcels (another Gradle dependency)
                 calorieIntent.putExtra(AppDefines.CALORIE_INTENT_KEY, Parcels.wrap((CalorieSearchItemModel) parent.getItemAtPosition(position)));
                 // Start the intended activity using the intent
