@@ -9,6 +9,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
@@ -66,8 +67,10 @@
                 android:value="edu.sonoma.cs370.motion.MainActivity" />
 
         </activity>
+
+
         <activity
-            android:name=".CalorieActivity"
+            android:name=".SearchActivity"
             android:label="@string/title_activity_calorie"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -75,6 +78,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.sonoma.cs370.motion.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>
+
+
