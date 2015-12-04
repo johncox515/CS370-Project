@@ -17,4 +17,7 @@ public class FoodSearchItemModel {
 
         @SerializedName("item_id")
         public String item_id;
+
+        @SerializedName("nf_calories")
+        public String calories;
 }

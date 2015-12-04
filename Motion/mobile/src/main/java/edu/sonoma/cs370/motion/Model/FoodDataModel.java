@@ -14,8 +14,8 @@ import edu.sonoma.cs370.motion.*;
 @Parcel
 public class FoodDataModel {
 
-    @SerializedName("nf_calories")
-    public ArrayList<String> calories;
+//    @SerializedName("nf_calories")
+//    public ArrayList<String> calories;
 
     @SerializedName("item_id")
     public String item_id;
@@ -23,8 +23,8 @@ public class FoodDataModel {
     @SerializedName("item_name")
     public String item_name;
 
-   // @SerializedName("nf_calories")
-   // public String nf_calories;
+    @SerializedName("nf_calories")
+    public String calories;
 
 
 }

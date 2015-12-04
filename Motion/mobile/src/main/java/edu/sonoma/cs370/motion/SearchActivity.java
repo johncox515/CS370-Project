@@ -3,6 +3,7 @@ package edu.sonoma.cs370.motion;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,6 +65,7 @@ public class SearchActivity extends AppCompatActivity {
                             @Override
                             public void onNext(FoodSearchResultModel searchResultModel) {
                                 // Once the result set comes back from the API call, it's handed off to an adapter for processing
+                                Log.d("test", "test");
                                 foodListView.setAdapter(new FoodListAdapter(SearchActivity.this, searchResultModel.results));
                             }
                         });
@@ -78,7 +80,11 @@ public class SearchActivity extends AppCompatActivity {
 
                 Intent foodIntent = new Intent(SearchActivity.this, CalorieActivity.class);
 
-                foodIntent.putExtra(AppDefines.FOOD_INTENT_KEY, Parcels.wrap((FoodSearchItemModel)parent.getItemAtPosition(position)));
+                Log.d("Clicked on", String.valueOf(parent.getItemAtPosition(position)));
+                Log.d("id", String.valueOf(id));
+                Log.d("position", String.valueOf(position));
+
+                foodIntent.putExtra(AppDefines.FOOD_INTENT_KEY, Parcels.wrap(parent.getItemAtPosition(position)));
 
                 startActivity(foodIntent);
             }

@@ -3,12 +3,15 @@ package edu.sonoma.cs370.motion;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.parceler.Parcels;
+import org.w3c.dom.Text;
 
 import edu.sonoma.cs370.motion.Model.FoodDataModel;
 import edu.sonoma.cs370.motion.Model.FoodSearchItemModel;
@@ -20,26 +23,32 @@ import rx.schedulers.Schedulers;
 public class CalorieActivity extends AppCompatActivity {
 
     private ListView NutritionList;
+    private TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calorie);
+        Log.d("tag", "inside CalorieActivity onCreate");
+        Log.d("Food intent key", AppDefines.FOOD_INTENT_KEY);
 
-
-        NutritionList = (ListView) findViewById(R.id.NutritionList);
-
+        //NutritionList = (ListView) findViewById(R.id.NutritionList);
+        test = (TextView) findViewById(R.id.test);
 
         final FoodSearchItemModel foodItem =
-                (FoodSearchItemModel) Parcels.unwrap(this.getIntent().getParcelableExtra(AppDefines.FOOD_INTENT_KEY));
+                Parcels.unwrap(this.getIntent().getParcelableExtra(AppDefines.FOOD_INTENT_KEY));
 
-        setTitle(foodItem.item_name);
+        Log.d("unwrapped string", String.valueOf(foodItem.foodData.item_name));
+        Log.d("calories", String.valueOf(foodItem.foodData.calories));
+
+        test.setText(foodItem.foodData.item_name);
+        setTitle(foodItem.foodData.item_name);
 
 
         //getting Food data using the ID...
 
         FoodServiceClient.getFoodProvider()
-                .getFoodById(foodItem.item_id, AppDefines.APP_ID, AppDefines.API_KEY)
+                .getFoodById(foodItem.foodData.item_id, AppDefines.APP_ID, AppDefines.API_KEY)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<FoodDataModel>() {
@@ -58,13 +67,14 @@ public class CalorieActivity extends AppCompatActivity {
                         // Handle the results
                         if (foodDataModel != null) {
 
-                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                                    CalorieActivity.this,
-                                    android.R.layout.simple_list_item_1,
-                                    foodDataModel.calories);
+//                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+//                                    CalorieActivity.this,
+//                                    android.R.layout.simple_list_item_1,
+//                                    foodDataModel.calories);
 
-                            NutritionList.setAdapter(arrayAdapter);
+                            //NutritionList.setAdapter(arrayAdapter);
 
+                            Log.d("calories", String.valueOf(foodDataModel.calories));
 
                         }
                         else {}
