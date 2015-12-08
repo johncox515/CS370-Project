@@ -60,7 +60,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> time_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -82,7 +82,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> date_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -97,7 +97,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> miles_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){

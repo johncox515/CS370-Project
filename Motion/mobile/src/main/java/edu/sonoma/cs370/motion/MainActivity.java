@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView date;
     private TextView time;
     private TextView miles;
+    private TextView totalCalories;
 
     MotionDbHelper mydb;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         date = (TextView) findViewById(R.id.dateView);
         time = (TextView) findViewById(R.id.timeView);
         miles = (TextView) findViewById(R.id.milesView);
+        totalCalories = (TextView) findViewById(R.id.totalCalories);
 
         mydb = new MotionDbHelper(this);
 

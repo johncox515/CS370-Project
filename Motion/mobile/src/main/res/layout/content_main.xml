@@ -132,6 +132,18 @@
         android:gravity="center_horizontal"
         android:textColor="#010101" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="You have had 75 amount of calories"
+        android:id="@+id/totalCalories"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/settings"
+        android:layout_alignLeft="@+id/timeView"
+        android:layout_alignStart="@+id/timeView" />
+
 
 </RelativeLayout>
 
