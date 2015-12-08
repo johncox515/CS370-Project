@@ -108,6 +108,23 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         return miles_list;
     }
 
+    public ArrayList<String> gettotalCalories(){
+        ArrayList<String> miles_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            miles_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
+
+            res.moveToNext();
+        }
+        return miles_list;
+    }
+
+
+
     private static final String TEXT_TYPE_INT = " INTEGER";
     private static final String TEXT_TYPE_REAL = " REAL";
     private static final String TEXT_TYPE_TEXT = " TEXT";
