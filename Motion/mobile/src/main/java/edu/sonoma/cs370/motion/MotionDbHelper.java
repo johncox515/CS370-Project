@@ -8,9 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * Created by Michael on 11/17/15.
- */
 public class MotionDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
@@ -60,7 +57,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> time_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -82,7 +79,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> date_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -97,7 +94,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> miles_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
