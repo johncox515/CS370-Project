@@ -1,11 +1,13 @@
 package edu.sonoma.cs370.motion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +26,12 @@ public class CalorieActivity extends AppCompatActivity {
 
     private ListView NutritionList;
     private TextView test;
+    private TextView brandName;
+    private TextView calories;
+    private TextView totalFat;
+    private TextView sodium;
+    private TextView protein;
+    private TextView sugars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,13 @@ public class CalorieActivity extends AppCompatActivity {
 
         //NutritionList = (ListView) findViewById(R.id.NutritionList);
         test = (TextView) findViewById(R.id.test);
+        brandName = (TextView) findViewById(R.id.brandName);
+        calories = (TextView) findViewById(R.id.calories);
+        totalFat = (TextView) findViewById(R.id.totalFat);
+        sodium = (TextView) findViewById(R.id.sodium);
+        protein = (TextView) findViewById(R.id.protein);
+        sugars = (TextView) findViewById(R.id.sugars);
+
 
         final FoodSearchItemModel foodItem =
                 Parcels.unwrap(this.getIntent().getParcelableExtra(AppDefines.FOOD_INTENT_KEY));
@@ -43,6 +58,7 @@ public class CalorieActivity extends AppCompatActivity {
 
         test.setText(foodItem.foodData.item_name);
         setTitle(foodItem.foodData.item_name);
+
 
 
         //getting Food data using the ID...
@@ -75,6 +91,14 @@ public class CalorieActivity extends AppCompatActivity {
                             //NutritionList.setAdapter(arrayAdapter);
 
                             Log.d("calories", String.valueOf(foodDataModel.calories));
+                            brandName.setText(foodItem.foodData.brandName);
+                            calories.setText("Calories: " + foodDataModel.calories);
+                            totalFat.setText("Total Fat: " + foodDataModel.totalFat + " grams");
+                            sodium.setText("Sodium: " + foodDataModel.sodium + " milligrams");
+                            protein.setText("Protein: " + foodDataModel.protein + " grams");
+                            sugars.setText("Sugars: " + foodDataModel.sugars + " grams");
+
+
 
                         }
                         else {}
@@ -105,6 +129,13 @@ public class CalorieActivity extends AppCompatActivity {
 
 
     }
+
+    public void goToMainActivity(View v)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }
 
 

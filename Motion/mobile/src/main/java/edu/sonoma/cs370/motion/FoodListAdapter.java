@@ -39,7 +39,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodSearchItemModel> {
 
 
                 if (nameText != null) {
-                    nameText.setText(food.foodData.item_name);
+                    nameText.setText(food.foodData.item_name + "\n" + food.foodData.brandName);
                 }
 
 
