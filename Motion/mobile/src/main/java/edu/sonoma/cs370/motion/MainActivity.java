@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         date.setText(String.valueOf(mydb.getDate()).replace(",", " ").replace("[", " ").replace("]", "\n").trim());
         time.setText(String.valueOf(mydb.getTime()).replace(",", ":").replace("[", "").replace("]", "\n").trim());
         miles.setText(String.valueOf(mydb.getMiles()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
-        totalCalories.setText(String.valueOf(mydb.gettotalCalories()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
+        totalCalories.setText(String.valueOf(mydb.getCalories()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
     }
 
     @Override
