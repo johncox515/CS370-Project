@@ -20,6 +20,7 @@ import edu.sonoma.cs370.motion.Model.FoodSearchItemModel;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import java.lang.String;
 
 
 public class CalorieActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class CalorieActivity extends AppCompatActivity {
     private TextView sodium;
     private TextView protein;
     private TextView sugars;
+    private Float floatCalories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +101,14 @@ public class CalorieActivity extends AppCompatActivity {
                             sugars.setText("Sugars: " + foodDataModel.sugars + " grams");
 
 
+                            floatCalories = Float.parseFloat(foodDataModel.calories);
+
 
                         }
                         else {}
                     }
+
+
                 });
     }
 
@@ -135,6 +141,8 @@ public class CalorieActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
 
 }
 
