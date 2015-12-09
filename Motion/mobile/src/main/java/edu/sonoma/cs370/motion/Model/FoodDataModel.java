@@ -23,8 +23,24 @@ public class FoodDataModel {
     @SerializedName("item_name")
     public String item_name;
 
+    @SerializedName("brand_name")
+    public String brandName;
+
     @SerializedName("nf_calories")
     public String calories;
+
+    @SerializedName("nf_total_fat")
+    public String totalFat;
+
+    @SerializedName("nf_sodium")
+    public String sodium;
+
+    @SerializedName("nf_protein")
+    public String protein;
+
+    @SerializedName("nf_sugars")
+    public String sugars;
+
 
 
 }
