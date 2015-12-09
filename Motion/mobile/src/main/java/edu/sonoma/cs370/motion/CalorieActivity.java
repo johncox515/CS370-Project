@@ -23,6 +23,7 @@ import edu.sonoma.cs370.motion.Model.FoodSearchItemModel;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import java.lang.String;
 
 
 public class CalorieActivity extends AppCompatActivity {
@@ -36,6 +37,8 @@ public class CalorieActivity extends AppCompatActivity {
     private TextView sodium;
     private TextView protein;
     private TextView sugars;
+    private Float floatCalories;
+    private FoodDataModel foodDataModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class CalorieActivity extends AppCompatActivity {
                     public void onNext(FoodDataModel foodDataModel) {
                         // Handle the results
                         if (foodDataModel != null) {
-
+                            CalorieActivity.this.foodDataModel = foodDataModel;
 //                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
 //                                    CalorieActivity.this,
 //                                    android.R.layout.simple_list_item_1,
@@ -98,8 +101,12 @@ public class CalorieActivity extends AppCompatActivity {
 
                             Log.d("calories", String.valueOf(foodDataModel.calories));
 
-                            mydb.addCalories(foodDataModel.calories, date);
-                            test.setText(String.valueOf(foodDataModel.calories));
+
+                            floatCalories = Float.parseFloat(foodDataModel.calories);
+                            mydb.addCalories(floatCalories, date);
+                            test.setText(String.valueOf(foodItem.foodData.item_name));
+
+
 
                             brandName.setText(foodItem.foodData.brandName);
                             calories.setText("Calories: " + foodDataModel.calories);
@@ -113,6 +120,8 @@ public class CalorieActivity extends AppCompatActivity {
                         }
                         else {}
                     }
+
+
                 });
     }
 
@@ -140,19 +149,24 @@ public class CalorieActivity extends AppCompatActivity {
 
     }
 
-    public void goToMainActivity(View v)
+    /*public void goToMainActivity(View v)
+   {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }*/
+
+
+    public void caloriesToDb(View v)
     {
+        String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
+        mydb.addCalories(floatCalories, date);
+        //test.setText(String.valueOf(foodDataModel.calories));
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void caloriesToDb(FoodDataModel foodDataModel)
-    {
-        Log.d("calories", String.valueOf(foodDataModel.calories));
-        String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
-        mydb.addCalories(foodDataModel.calories, date);
-        test.setText(String.valueOf(foodDataModel.calories));
-    }
+
+
 }
 
 

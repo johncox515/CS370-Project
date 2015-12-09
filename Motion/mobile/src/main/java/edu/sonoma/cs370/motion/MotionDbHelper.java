@@ -157,9 +157,9 @@ public class MotionDbHelper extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + MotionReaderContract.MotionEntry.TABLE_NAME;
     private static final String SQL_DELETE_CALORIES = "DROP TABLE IF EXISTS Calories;";
 
-    private static final String SQL_CREATE_CALORIES = "CREATE TABLE Calories (id INTEGER PRIMARY KEY AUTOINCREMENT, calories TEXT, date TEXT);";
+    private static final String SQL_CREATE_CALORIES = "CREATE TABLE Calories (id INTEGER PRIMARY KEY AUTOINCREMENT, calories REAL, date TEXT);";
 
-    public void addCalories(String calories, String date){
+    public void addCalories(float calories, String date){
         ContentValues values = new ContentValues();
         SQLiteDatabase db = getWritableDatabase();
         values.put("calories", calories);
