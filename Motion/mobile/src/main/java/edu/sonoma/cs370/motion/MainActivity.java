@@ -1,5 +1,7 @@
 package edu.sonoma.cs370.motion;
 
+import android.widget.ArrayAdapter;
+import android.app.ListActivity;
 import android.widget.EditText;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +13,19 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "edu.sonoma.cs370.motion.MESSAGE";
-    private TextView date;
-    private TextView time;
-    private TextView miles;
+//    private TextView date;
+//    private TextView time;
+//    private TextView miles;
+    private ListView totalStats;
     private TextView totalCalories;
 
     MotionDbHelper mydb;
@@ -28,17 +34,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        date = (TextView) findViewById(R.id.dateView);
-        time = (TextView) findViewById(R.id.timeView);
-        miles = (TextView) findViewById(R.id.milesView);
+//        date = (TextView) findViewById(R.id.dateView);
+//        time = (TextView) findViewById(R.id.timeView);
+//        miles = (TextView) findViewById(R.id.milesView);
+        totalStats = (ListView) findViewById(R.id.totalStatsView);
         totalCalories = (TextView) findViewById(R.id.totalCalories);
 
         mydb = new MotionDbHelper(this);
-
-        date.setText(String.valueOf(mydb.getDate()).replace(",", " ").replace("[", " ").replace("]", "\n").trim());
-        time.setText(String.valueOf(mydb.getTime()).replace(",", ":").replace("[", "").replace("]", "\n").trim());
-        miles.setText(String.valueOf(mydb.getMiles()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
+        ArrayList<String> values = mydb.getTotalStats();
+        ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        totalStats.setAdapter(adapter);
         totalCalories.setText(String.valueOf(mydb.getCalories()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
+//        date.setText(String.valueOf(mydb.getDate()).replace(",", " ").replace("[", " ").replace("]", "\n").trim());
+//        time.setText(String.valueOf(mydb.getTime()).replace(",", ":").replace("[", "").replace("]", "\n").trim());
+//        miles.setText(String.valueOf(mydb.getMiles()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
+
     }
 
     @Override

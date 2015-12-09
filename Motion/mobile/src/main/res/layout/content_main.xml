@@ -57,19 +57,28 @@
         android:layout_alignParentStart="true"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/dateView"
-        android:textSize="20dp"
-        android:layout_above="@+id/calories"
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/totalStatsView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/imageView"
-        android:textColor="#010101"
-        android:layout_alignRight="@+id/calories"
-        android:layout_alignEnd="@+id/calories" />
+        android:layout_below="@+id/textView2"
+        android:layout_above="@+id/calories"/>
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text=""-->
+        <!--android:id="@+id/dateView"-->
+        <!--android:textSize="20dp"-->
+        <!--android:layout_above="@+id/calories"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignTop="@+id/imageView"-->
+        <!--android:textColor="#010101"-->
+        <!--android:layout_alignRight="@+id/calories"-->
+        <!--android:layout_alignEnd="@+id/calories" />-->
 
     <TextView
         android:layout_width="wrap_content"
@@ -105,42 +114,50 @@
         android:background="#fcfcfc"
         android:textColor="#020202" />
 
-    <TextView
-        android:layout_width="125dp"
-        android:layout_height="fill_parent"
-        android:id="@+id/timeView"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_below="@+id/textView2"
-        android:layout_toLeftOf="@+id/milesView"
-        android:layout_toRightOf="@+id/calories"
-        android:layout_toEndOf="@+id/calories"
-        android:textSize="20dp"
-        android:gravity="center_horizontal"
-        android:textColor="#010101" />
+    <!--<TextView-->
+        <!--android:layout_width="125dp"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:id="@+id/timeView"-->
+        <!--android:layout_alignBottom="@+id/imageView"-->
+        <!--android:layout_below="@+id/textView2"-->
+        <!--android:layout_toLeftOf="@+id/milesView"-->
+        <!--android:layout_toRightOf="@+id/calories"-->
+        <!--android:layout_toEndOf="@+id/calories"-->
+        <!--android:textSize="20dp"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:textColor="#010101" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/milesView"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignLeft="@+id/settings"
-        android:layout_alignStart="@+id/settings"
-        android:textSize="20dp"
-        android:gravity="center_horizontal"
-        android:textColor="#010101" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/milesView"-->
+        <!--android:layout_below="@+id/textView2"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignBottom="@+id/imageView"-->
+        <!--android:layout_alignLeft="@+id/settings"-->
+        <!--android:layout_alignStart="@+id/settings"-->
+        <!--android:textSize="20dp"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:textColor="#010101" />-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="You have had 75 amount of calories"
+        android:text="calories"
         android:id="@+id/totalCalories"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/textView3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="  Calories consumed"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/calories"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

@@ -46,7 +46,7 @@ public class CalorieActivity extends AppCompatActivity {
         Log.d("unwrapped string", String.valueOf(foodItem.foodData.item_name));
         Log.d("calories", String.valueOf(foodItem.foodData.calories));
 
-        test.setText(foodItem.foodData.item_name);
+        //test.setText(foodItem.foodData.item_name);
         setTitle(foodItem.foodData.item_name);
 
 
@@ -83,8 +83,7 @@ public class CalorieActivity extends AppCompatActivity {
 
                             Log.d("calories", String.valueOf(foodDataModel.calories));
                             mydb.addCalories(foodDataModel.calories, date);
-
-
+                            test.setText(String.valueOf(foodDataModel.calories));
                         }
                         else {}
                     }
