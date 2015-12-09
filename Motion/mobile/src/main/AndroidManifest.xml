@@ -40,7 +40,11 @@
             android:label="@string/title_activity_running"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
+        <activity
+            android:name=".CalorieActivity"
+            android:label="CalorieActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"

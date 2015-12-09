@@ -108,6 +108,24 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         return miles_list;
     }
 
+    public ArrayList<String> getTotalStats(){
+        ArrayList<String> totalStats_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Motion", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
+            totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN)));
+            totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC)));
+            totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC)));
+            totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
+            res.moveToNext();
+        }
+        return totalStats_list;
+    }
+
     private static final String TEXT_TYPE_INT = " INTEGER";
     private static final String TEXT_TYPE_REAL = " REAL";
     private static final String TEXT_TYPE_TEXT = " TEXT";
