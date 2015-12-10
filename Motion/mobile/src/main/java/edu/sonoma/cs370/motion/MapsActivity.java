@@ -40,7 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ImageButton startButton;
-    private Button finishButton;
+    private ImageButton finishButton;
 
     boolean isPressed = true;
 
@@ -79,7 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         startButton = (ImageButton) findViewById(R.id.startButton);
 
-        finishButton = (Button) findViewById(R.id.finishButton);
+        finishButton = (ImageButton) findViewById(R.id.finishButton);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
