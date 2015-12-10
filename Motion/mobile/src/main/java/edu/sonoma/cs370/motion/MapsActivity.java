@@ -122,6 +122,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String FinalMilliseconds = String.format("%03d", milliseconds);
                         //Log.d("Final Milliseconds: ", FinalMilliseconds);
 
+                        String FinalTime = String.format("%02", mins) + ":" + String.format("%02", secs) + ":" + String.format("%03", milliseconds);
+
                         String FinalMiles = String.format("%.2f", totalMiles) + " Miles";
                         //Log.d("Final Miles: ", FinalMiles);
 
