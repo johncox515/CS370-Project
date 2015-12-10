@@ -1,5 +1,20 @@
 package edu.sonoma.cs370.motion;
 
+import static edu.sonoma.cs370.motion.Constants.Date;
+import static edu.sonoma.cs370.motion.Constants.Time;
+import static edu.sonoma.cs370.motion.Constants.Miles;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+import android.widget.ListView;
+
 import android.widget.ArrayAdapter;
 import android.app.ListActivity;
 import android.widget.EditText;
@@ -13,10 +28,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.ListView;
-import android.widget.TextView;
+
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView totalStats;
     private TextView totalCalories;
 
+    private ArrayList<HashMap<String, String>> list;
+
     MotionDbHelper mydb;
 
     @Override
@@ -37,14 +54,37 @@ public class MainActivity extends AppCompatActivity {
 //        date = (TextView) findViewById(R.id.dateView);
 //        time = (TextView) findViewById(R.id.timeView);
 //        miles = (TextView) findViewById(R.id.milesView);
-        totalStats = (ListView) findViewById(R.id.totalStatsView);
+        //totalStats = (ListView) findViewById(R.id.totalStatsView);
         totalCalories = (TextView) findViewById(R.id.totalCalories);
+        ListView listView = (ListView)findViewById(R.id.totalStatsView);
+        list = new ArrayList<HashMap<String, String>>();
+
+        HashMap<String,String> temp=new HashMap<String, String>();
+        temp.put(Date, "Ankit Karia");
+        temp.put(Time, "Male");
+        temp.put(Miles, "22");
+        list.add(temp);
+
+        HashMap<String,String> temp2=new HashMap<String, String>();
+        temp2.put(Date, "Rajat Ghai");
+        temp2.put(Time, "Male");
+        temp2.put(Miles, "25");
+        list.add(temp2);
+
+        HashMap<String,String> temp3=new HashMap<String, String>();
+        temp3.put(Date, "Karina Kaif");
+        temp3.put(Time, "Female");
+        temp3.put(Miles, "31");
+        list.add(temp3);
+
+        ListViewAdapter adapter=new ListViewAdapter(this, list);
+        listView.setAdapter(adapter);
 
         mydb = new MotionDbHelper(this);
         ArrayList<String> values = mydb.getTotalStats();
-        ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
-        totalStats.setAdapter(adapter);
-        totalCalories.setText(String.valueOf(mydb.getCaloriesCount()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
+        //ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        //totalStats.setAdapter(adapter);
+        //totalCalories.setText(String.valueOf(mydb.getCaloriesCount()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
 //        date.setText(String.valueOf(mydb.getDate()).replace(",", " ").replace("[", " ").replace("]", "\n").trim());
 //        time.setText(String.valueOf(mydb.getTime()).replace(",", ":").replace("[", "").replace("]", "\n").trim());
 //        miles.setText(String.valueOf(mydb.getMiles()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
