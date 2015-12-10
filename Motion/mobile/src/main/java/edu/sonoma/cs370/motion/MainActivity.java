@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToSettingsActivity(View v)
     {
-       Intent intent = new Intent(this,Settings.class);
+       Intent intent = new Intent(this,Profile.class);
        //EditText editText = (EditText) findViewById(R.id.edit_message);
        // String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
