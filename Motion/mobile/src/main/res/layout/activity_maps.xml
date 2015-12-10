@@ -63,26 +63,26 @@
     </RadioGroup>
 
     <ImageButton
-        android:layout_width="185dp"
+        android:layout_width="179dp"
         android:layout_height="81dp"
         android:text="START"
         android:id="@+id/startButton"
         android:clickable="false"
-        android:background="#fafbfa"
+        android:background="#80000000"
         android:textStyle="bold"
         android:src="@drawable/startbutton"
         android:scaleType="fitXY"
         android:layout_gravity="left|bottom|center_horizontal" />
 
-    <Button
-        android:layout_width="152dp"
-        android:layout_height="79dp"
-        android:text="FINISH"
+    <ImageButton
+        android:layout_width="181dp"
+        android:layout_height="81dp"
+        android:src="@drawable/finish"
         android:id="@+id/finishButton"
         android:layout_gravity="right|bottom"
-        android:background="#031bfa"
-        android:textColor="#fbf8f8"
-        android:textSize="48dp" />
+        android:background="#80000000"
+        android:scaleType="fitXY"
+        android:textColor="#fbf8f8" />
 
 
 </FrameLayout>
