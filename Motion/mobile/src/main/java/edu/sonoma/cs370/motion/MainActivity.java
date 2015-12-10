@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(temp5);*/
         mydb = new MotionDbHelper(this);
 
-        mydb.getTotalStats();
+        //mydb.getTotalStats();
         ListViewAdapter adapter=new ListViewAdapter(this, MotionDbHelper.list);
         listView.setAdapter(adapter);
 

@@ -136,6 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         mydb.createAddEntry(totalMiles,FinalTime, date);
                         //Log.d("Database Output: ", String.valueOf(mydb.viewEntries()));
                         Log.d("Calories Output: ", String.valueOf(mydb.getCalories()));
+                        mydb.getTotalStats();
 
 
                         startTime = 0L;
