@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView totalStats;
     private TextView totalCalories;
 
-    private ArrayList<HashMap<String, String>> list;
+    //private ArrayList<HashMap<String, String>> list;
 
     MotionDbHelper mydb;
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         //totalStats = (ListView) findViewById(R.id.totalStatsView);
         totalCalories = (TextView) findViewById(R.id.totalCalories);
         ListView listView = (ListView)findViewById(R.id.totalStatsView);
-        list = new ArrayList<HashMap<String, String>>();
+        /*list = new ArrayList<HashMap<String, String>>();
 
         HashMap<String,String> temp=new HashMap<String, String>();
         temp.put(Date, "Ankit Karia");
@@ -77,11 +77,24 @@ public class MainActivity extends AppCompatActivity {
         temp3.put(Miles, "31");
         list.add(temp3);
 
-        ListViewAdapter adapter=new ListViewAdapter(this, list);
+        HashMap<String,String> temp4=new HashMap<String, String>();
+        temp4.put(Date, "Karina Kaif");
+        temp4.put(Time, "Female");
+        temp4.put(Miles, "31");
+        list.add(temp4);
+
+        HashMap<String,String> temp5=new HashMap<String, String>();
+        temp5.put(Date, "Karina Kaif");
+        temp5.put(Time, "Female");
+        temp5.put(Miles, "31");
+        list.add(temp5);*/
+        mydb = new MotionDbHelper(this);
+
+        mydb.getTotalStats();
+        ListViewAdapter adapter=new ListViewAdapter(this, MotionDbHelper.list);
         listView.setAdapter(adapter);
 
-        mydb = new MotionDbHelper(this);
-        ArrayList<String> values = mydb.getTotalStats();
+        //ArrayList<String> values = mydb.getTotalStats();
         //ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
         //totalStats.setAdapter(adapter);
         //totalCalories.setText(String.valueOf(mydb.getCaloriesCount()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());

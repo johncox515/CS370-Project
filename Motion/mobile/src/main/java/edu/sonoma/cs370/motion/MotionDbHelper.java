@@ -1,6 +1,13 @@
 package edu.sonoma.cs370.motion;
 
+import static edu.sonoma.cs370.motion.Constants.Date;
+import static edu.sonoma.cs370.motion.Constants.Time;
+import static edu.sonoma.cs370.motion.Constants.Miles;
+
+
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +19,9 @@ import android.util.Log;
 public class MotionDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
+
+    static final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Motion.db";
@@ -121,22 +131,33 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         }
         return miles_list;
     }
-    public ArrayList<String> getTotalStats(){
-        ArrayList<String> totalStats_list = new ArrayList<String>();
-
+    public HashMap<String, String> getTotalStats(){
+        //ArrayList<String> totalStats_list = new ArrayList<String>();
+        HashMap<String,String> temp = new HashMap<String, String>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from Motion", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
+            /*totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
             totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN)));
             totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC)));
             totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC)));
-            totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
+            totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));*/
+            temp.put(Date, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
+            //temp.put(Time, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN)));
+            temp.put(Time, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC)));
+            //temp.put(Time, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC)));
+            temp.put(Miles, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
+
             res.moveToNext();
+
+
         }
-        return totalStats_list;
+        Log.d("list before:", String.valueOf(list));
+        list.add(temp);
+        Log.d("list after:", String.valueOf(list));
+        return temp;
     }
 
     private static final String TEXT_TYPE_INT = " INTEGER";

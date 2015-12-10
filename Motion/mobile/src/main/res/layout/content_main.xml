@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="             Date                          Time                       Miles"
+        android:text="             Date                     Time                       Miles"
         android:id="@+id/textView2"
         android:layout_above="@+id/imageView"
         android:layout_alignParentLeft="true"
