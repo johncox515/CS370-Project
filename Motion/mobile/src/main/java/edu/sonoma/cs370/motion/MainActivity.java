@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> values = mydb.getTotalStats();
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
         totalStats.setAdapter(adapter);
-        totalCalories.setText(String.valueOf(mydb.getCalories()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
+        totalCalories.setText(String.valueOf(mydb.getCaloriesCount()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
 //        date.setText(String.valueOf(mydb.getDate()).replace(",", " ").replace("[", " ").replace("]", "\n").trim());
 //        time.setText(String.valueOf(mydb.getTime()).replace(",", ":").replace("[", "").replace("]", "\n").trim());
 //        miles.setText(String.valueOf(mydb.getMiles()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());

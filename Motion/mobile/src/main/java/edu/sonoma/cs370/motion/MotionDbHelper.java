@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -179,13 +180,27 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery( "select * from Calories order by id desc", null );
         res.moveToFirst();
-
+        Log.d("res = ", DatabaseUtils.dumpCursorToString(res));
         while(res.isAfterLast() == false){
             calories.add(res.getString(res.getColumnIndex("calories")));
 
             res.moveToNext();
         }
         return calories;
+    }
+
+    public float getCaloriesCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM(calories) FROM Calories", null);
+        if(cursor.moveToFirst()){
+            Log.d("cursor.getFloat: ", String.valueOf(cursor.getFloat(0)));
+            return cursor.getFloat(0);
+
+        }
+        else{
+            Log.d("cursor.getFloat: ", " in else");
+            return 0;
+        }
     }
 
 }

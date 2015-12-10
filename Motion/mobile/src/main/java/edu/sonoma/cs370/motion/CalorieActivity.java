@@ -103,7 +103,7 @@ public class CalorieActivity extends AppCompatActivity {
 
 
                             floatCalories = Float.parseFloat(foodDataModel.calories);
-                            mydb.addCalories(floatCalories, date);
+                            //mydb.addCalories(floatCalories, date);
                             test.setText(String.valueOf(foodItem.foodData.item_name));
 
 
