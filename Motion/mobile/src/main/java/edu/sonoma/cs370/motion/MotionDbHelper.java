@@ -47,13 +47,11 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void createAddEntry(float totalMiles, String totalMin, String totalSec, String totalMillisec, String date){
+    public void createAddEntry(float totalMiles, String totalTime, String date){
         ContentValues values = new ContentValues();
         SQLiteDatabase db = getWritableDatabase();
         values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE, totalMiles);
-        values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN, totalMin);
-        values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC, totalSec);
-        values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC, totalMillisec);
+        values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME, totalTime);
         values.put(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE, date);
 
 
@@ -65,25 +63,6 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<String> getTime(){
-        ArrayList<String> time_list = new ArrayList<String>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false){
-            //time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
-            time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN)));
-            time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC)));
-            time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC)));
-            //time_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
-
-
-            res.moveToNext();
-        }
-        return time_list;
-    }
 
 
 
@@ -146,7 +125,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
             totalStats_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));*/
             temp.put(Date, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DATE)));
             //temp.put(Time, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN)));
-            temp.put(Time, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC)));
+            temp.put(Time, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME)));
             //temp.put(Time, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC)));
             temp.put(Miles, res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
 
@@ -170,9 +149,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
                     MotionReaderContract.MotionEntry.COLUMN_NAME_CALORIE_START + TEXT_TYPE_INT + COMMA_SEP +
                     MotionReaderContract.MotionEntry.COLUMN_NAME_CURRENT_CALORIES + TEXT_TYPE_INT + COMMA_SEP +
                     MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE + TEXT_TYPE_REAL + COMMA_SEP +
-                    MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MIN + TEXT_TYPE_TEXT + COMMA_SEP +
-                    MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_SEC + TEXT_TYPE_TEXT + COMMA_SEP +
-                    MotionReaderContract.MotionEntry.COLUMN_NAME_TIME_MILLISEC + TEXT_TYPE_TEXT + COMMA_SEP +
+                    MotionReaderContract.MotionEntry.COLUMN_NAME_TIME + TEXT_TYPE_TEXT + COMMA_SEP +
                     MotionReaderContract.MotionEntry.COLUMN_NAME_DATE + TEXT_TYPE_TEXT + " );";
 
     private static final String SQL_DELETE_ENTRIES =

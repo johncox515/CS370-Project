@@ -16,9 +16,7 @@ public final class MotionReaderContract {
         public static final String COLUMN_NAME_CURRENT_CALORIES = "CaloriesCurrent";
         public static final String COLUMN_NAME_DATE = "Date";
         public static final String COLUMN_NAME_DISTANCE = "MilesRun";
-        public static final String COLUMN_NAME_TIME_MIN = "MinutesTime";
-        public static final String COLUMN_NAME_TIME_SEC = "SecTime";
-        public static final String COLUMN_NAME_TIME_MILLISEC = "MilliTime";
+        public static final String COLUMN_NAME_TIME = "Time";
 
     }
 

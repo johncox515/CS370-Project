@@ -122,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String FinalMilliseconds = String.format("%03d", milliseconds);
                         //Log.d("Final Milliseconds: ", FinalMilliseconds);
 
-                        String FinalTime = String.format("%02", mins) + ":" + String.format("%02", secs) + ":" + String.format("%03", milliseconds);
+                        String FinalTime = String.format("%02d", mins) + ":" + String.format("%02d", secs) + ":" + String.format("%03d", milliseconds);
 
                         String FinalMiles = String.format("%.2f", totalMiles) + " Miles";
                         //Log.d("Final Miles: ", FinalMiles);
@@ -133,7 +133,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         //CALL TO DATABASE HERE
                         MotionDbHelper mydb = new MotionDbHelper(getBaseContext());
-                        mydb.createAddEntry(totalMiles, FinalMins, FinalSecs, FinalMilliseconds, date);
+                        mydb.createAddEntry(totalMiles,FinalTime, date);
                         //Log.d("Database Output: ", String.valueOf(mydb.viewEntries()));
                         Log.d("Calories Output: ", String.valueOf(mydb.getCalories()));
 
