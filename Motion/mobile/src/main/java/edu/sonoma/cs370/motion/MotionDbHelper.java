@@ -8,9 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * Created by Michael on 11/17/15.
- */
 public class MotionDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
@@ -25,6 +22,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(SQL_CREATE_CALORIES);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int OldVersion, int newVersion){
@@ -60,7 +58,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> time_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -82,7 +80,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> date_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -97,7 +95,7 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         ArrayList<String> miles_list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from Motion", null );
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
@@ -108,6 +106,20 @@ public class MotionDbHelper extends SQLiteOpenHelper {
         return miles_list;
     }
 
+    public ArrayList<String> gettotalCalories(){
+        ArrayList<String> miles_list = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Motion order by id desc", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            miles_list.add(res.getString(res.getColumnIndex(MotionReaderContract.MotionEntry.COLUMN_NAME_DISTANCE)));
+
+            res.moveToNext();
+        }
+        return miles_list;
+    }
     public ArrayList<String> getTotalStats(){
         ArrayList<String> totalStats_list = new ArrayList<String>();
 
@@ -143,5 +155,37 @@ public class MotionDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + MotionReaderContract.MotionEntry.TABLE_NAME;
+    private static final String SQL_DELETE_CALORIES = "DROP TABLE IF EXISTS Calories;";
+
+    private static final String SQL_CREATE_CALORIES = "CREATE TABLE Calories (id INTEGER PRIMARY KEY AUTOINCREMENT, calories REAL, date TEXT);";
+
+    public void addCalories(float calories, String date){
+        ContentValues values = new ContentValues();
+        SQLiteDatabase db = getWritableDatabase();
+        values.put("calories", calories);
+        values.put("date", date);
+
+        long newRowId;
+        newRowId = db.insert(
+                "Calories",
+                null,
+                values);
+        db.close();
+    }
+
+    public ArrayList<String> getCalories(){
+        ArrayList<String> calories = new ArrayList<String>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from Calories order by id desc", null );
+        res.moveToFirst();
+
+        while(res.isAfterLast() == false){
+            calories.add(res.getString(res.getColumnIndex("calories")));
+
+            res.moveToNext();
+        }
+        return calories;
+    }
 
 }

@@ -1,11 +1,13 @@
 package edu.sonoma.cs370.motion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,17 +15,30 @@ import android.widget.TextView;
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import edu.sonoma.cs370.motion.Model.FoodDataModel;
 import edu.sonoma.cs370.motion.Model.FoodSearchItemModel;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import java.lang.String;
 
 
 public class CalorieActivity extends AppCompatActivity {
 
     private ListView NutritionList;
     private TextView test;
+    MotionDbHelper mydb;
+    private TextView brandName;
+    private TextView calories;
+    private TextView totalFat;
+    private TextView sodium;
+    private TextView protein;
+    private TextView sugars;
+    private Float floatCalories;
+    private FoodDataModel foodDataModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +46,17 @@ public class CalorieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calorie);
         Log.d("tag", "inside CalorieActivity onCreate");
         Log.d("Food intent key", AppDefines.FOOD_INTENT_KEY);
+        mydb = new MotionDbHelper(this);
 
         //NutritionList = (ListView) findViewById(R.id.NutritionList);
         test = (TextView) findViewById(R.id.test);
+        brandName = (TextView) findViewById(R.id.brandName);
+        calories = (TextView) findViewById(R.id.calories);
+        totalFat = (TextView) findViewById(R.id.totalFat);
+        sodium = (TextView) findViewById(R.id.sodium);
+        protein = (TextView) findViewById(R.id.protein);
+        sugars = (TextView) findViewById(R.id.sugars);
+
 
         final FoodSearchItemModel foodItem =
                 Parcels.unwrap(this.getIntent().getParcelableExtra(AppDefines.FOOD_INTENT_KEY));
@@ -43,6 +66,7 @@ public class CalorieActivity extends AppCompatActivity {
 
         //test.setText(foodItem.foodData.item_name);
         setTitle(foodItem.foodData.item_name);
+
 
 
         //getting Food data using the ID...
@@ -66,19 +90,38 @@ public class CalorieActivity extends AppCompatActivity {
                     public void onNext(FoodDataModel foodDataModel) {
                         // Handle the results
                         if (foodDataModel != null) {
-
+                            CalorieActivity.this.foodDataModel = foodDataModel;
 //                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
 //                                    CalorieActivity.this,
 //                                    android.R.layout.simple_list_item_1,
 //                                    foodDataModel.calories);
+                            String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
 
                             //NutritionList.setAdapter(arrayAdapter);
 
                             Log.d("calories", String.valueOf(foodDataModel.calories));
-                            test.setText(String.valueOf(foodDataModel.calories));
+
+
+                            floatCalories = Float.parseFloat(foodDataModel.calories);
+                            mydb.addCalories(floatCalories, date);
+                            test.setText(String.valueOf(foodItem.foodData.item_name));
+
+
+
+                            brandName.setText(foodItem.foodData.brandName);
+                            calories.setText("Calories: " + foodDataModel.calories);
+                            totalFat.setText("Total Fat: " + foodDataModel.totalFat + " grams");
+                            sodium.setText("Sodium: " + foodDataModel.sodium + " milligrams");
+                            protein.setText("Protein: " + foodDataModel.protein + " grams");
+                            sugars.setText("Sugars: " + foodDataModel.sugars + " grams");
+
+
+
                         }
                         else {}
                     }
+
+
                 });
     }
 
@@ -105,6 +148,25 @@ public class CalorieActivity extends AppCompatActivity {
 
 
     }
+
+    /*public void goToMainActivity(View v)
+   {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }*/
+
+
+    public void caloriesToDb(View v)
+    {
+        String date = new SimpleDateFormat("MM-dd-yyyy").format(new Date());
+        mydb.addCalories(floatCalories, date);
+        //test.setText(String.valueOf(foodDataModel.calories));
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+
+
 }
 
 

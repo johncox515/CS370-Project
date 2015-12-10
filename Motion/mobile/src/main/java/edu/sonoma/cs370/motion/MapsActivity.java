@@ -133,6 +133,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         MotionDbHelper mydb = new MotionDbHelper(getBaseContext());
                         mydb.createAddEntry(totalMiles, FinalMins, FinalSecs, FinalMilliseconds, date);
                         //Log.d("Database Output: ", String.valueOf(mydb.viewEntries()));
+                        Log.d("Calories Output: ", String.valueOf(mydb.getCalories()));
+
 
                         startTime = 0L;
                         timeInMilliseconds = 0L;

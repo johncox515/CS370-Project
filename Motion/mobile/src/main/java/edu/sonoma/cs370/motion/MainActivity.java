@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 //    private TextView time;
 //    private TextView miles;
     private ListView totalStats;
+    private TextView totalCalories;
 
     MotionDbHelper mydb;
 
@@ -37,11 +38,13 @@ public class MainActivity extends AppCompatActivity {
 //        time = (TextView) findViewById(R.id.timeView);
 //        miles = (TextView) findViewById(R.id.milesView);
         totalStats = (ListView) findViewById(R.id.totalStatsView);
+        totalCalories = (TextView) findViewById(R.id.totalCalories);
 
         mydb = new MotionDbHelper(this);
         ArrayList<String> values = mydb.getTotalStats();
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
         totalStats.setAdapter(adapter);
+        totalCalories.setText(String.valueOf(mydb.getCalories()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
 //        date.setText(String.valueOf(mydb.getDate()).replace(",", " ").replace("[", " ").replace("]", "\n").trim());
 //        time.setText(String.valueOf(mydb.getTime()).replace(",", ":").replace("[", "").replace("]", "\n").trim());
 //        miles.setText(String.valueOf(mydb.getMiles()).replace(",", "\n").replace("[", " ").replace("]", "\n").trim());
